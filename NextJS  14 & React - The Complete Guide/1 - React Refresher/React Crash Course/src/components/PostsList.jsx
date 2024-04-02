@@ -1,13 +1,17 @@
 import React from "react";
 import styles from "./PostsList.module.css";
 import Post from "./Post";
+import NewPost from "./NewPost";
 
 const PostsList = () => {
     return (
-        <ul className={styles.posts}>
-            <Post name="Aleksandar" text="ReactJS is awesome!" />
-            <Post name="Maximilian" text="Glad you like it!!" />
-        </ul>
+        <>
+            <NewPost />
+            <ul className={styles.posts}>
+                <Post name="Aleksandar" text="ReactJS is awesome!" />
+                <Post name="Maximillian" text="Glad you like it!!" />
+            </ul>
+        </>
     );
 };
 
