@@ -1,7 +1,7 @@
-import Post from "./components/Post";
+import PostsList from "./components/PostsList";
 
 function App() {
-    return <Post name="Aleksandar" text="ReactJS is awesome!" />;
+    return <PostsList />;
 }
 
 export default App;
