@@ -21,7 +21,6 @@ const PostsList = () => {
 
     function formSubmitHandler(event) {
         event.preventDefault();
-        console.log(textValue, nameValue);
         setNameValue("");
         setTextValue("");
     }
