@@ -36,8 +36,7 @@ const PostsList = () => {
                 name={nameValue}
             />
             <ul className={styles.posts}>
-                <Post name="Aleksandar" text="ReactJS is awesome!" />
-                <Post name="Maximillian" text="Glad you like it!!" />
+                <Post name={nameValue} text={textValue} />
             </ul>
         </>
     );
