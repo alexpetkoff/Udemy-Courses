@@ -1,5 +1,3 @@
-const names = ["Alexander", "Alexander The Great"];
-
 function Post({ name, text }) {
     return (
         <div>
