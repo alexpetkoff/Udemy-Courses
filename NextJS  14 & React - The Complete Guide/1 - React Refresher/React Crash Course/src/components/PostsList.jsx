@@ -12,12 +12,15 @@ const PostsList = () => {
     const [textValue, setTextValue] = useState("");
     const [nameValue, setNameValue] = useState("");
     const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         async function fetchPosts() {
+            setIsLoading(true);
             const response = await fetch("http://localhost:8080/posts");
             const resData = await response.json();
             setPosts(resData.posts);
+            setIsLoading(false);
         }
 
         fetchPosts();
@@ -76,25 +79,41 @@ const PostsList = () => {
                     />
                 </Modal>
             )}
+            {!isLoading && posts.length > 0 && (
+                <ul className={styles.posts}>
+                    {posts.map((post, index) => {
+                        return (
+                            <Post
+                                key={index}
+                                name={post.name}
+                                text={post.text}
+                            />
+                        );
+                    })}
+                </ul>
+            )}
 
-            <ul className={styles.posts}>
-                {posts.map((post, index) => {
-                    return (
-                        <Post key={index} name={post.name} text={post.text} />
-                    );
-                })}
-                {posts.length === 0 && (
-                    <div
-                        style={{
-                            textAlign: "center",
-                            fontWeight: "700",
-                        }}
-                    >
-                        <p>No posts yet...</p>
-                        <p>Be the first one!</p>
-                    </div>
-                )}
-            </ul>
+            {!isLoading && posts.length === 0 && (
+                <div
+                    style={{
+                        textAlign: "center",
+                        fontWeight: "700",
+                    }}
+                >
+                    <p>No posts yet...</p>
+                    <p>Be the first one!</p>
+                </div>
+            )}
+            {isLoading && (
+                <div
+                    style={{
+                        textAlign: "center",
+                        fontWeight: "700",
+                    }}
+                >
+                    <p>Loading posts...</p>
+                </div>
+            )}
         </>
     );
 };
