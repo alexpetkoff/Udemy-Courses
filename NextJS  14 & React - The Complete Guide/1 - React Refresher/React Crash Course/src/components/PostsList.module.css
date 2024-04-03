@@ -8,3 +8,11 @@
     grid-template-columns: repeat(3, 30%);
     justify-content: center;
 }
+
+.button {
+    background-color: blueviolet;
+    border-color: aqua;
+    border: 1px solid cadetblue;
+    padding: 5px;
+    color: white;
+}
