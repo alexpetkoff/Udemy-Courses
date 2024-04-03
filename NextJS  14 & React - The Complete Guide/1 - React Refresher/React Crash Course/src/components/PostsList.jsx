@@ -8,7 +8,7 @@ import Modal from "./Modal";
 import MainHeader from "./MainHeader";
 
 const PostsList = () => {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const [textValue, setTextValue] = useState("");
     const [nameValue, setNameValue] = useState("");
 
