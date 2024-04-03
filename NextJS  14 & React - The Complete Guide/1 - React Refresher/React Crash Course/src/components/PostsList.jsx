@@ -66,6 +66,16 @@ const PostsList = () => {
                         <Post key={index} name={post.name} text={post.text} />
                     );
                 })}
+                {posts.length === 0 && (
+                    <div
+                        style={{
+                            textAlign: "center",
+                            fontWeight: "700",
+                        }}
+                    >
+                        No posts yet... Be the first one!
+                    </div>
+                )}
             </ul>
         </>
     );
