@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./PostsList.module.css";
 import Post from "./Post";
@@ -13,7 +13,24 @@ const PostsList = () => {
     const [nameValue, setNameValue] = useState("");
     const [posts, setPosts] = useState([]);
 
+    useEffect(() => {
+        async function fetchPosts() {
+            const response = await fetch("http://localhost:8080/posts");
+            const resData = await response.json();
+            setPosts(resData.posts);
+        }
+
+        fetchPosts();
+    }, []);
+
     function addPostHandler(postData) {
+        fetch("http://localhost:8080/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+        });
         setPosts([postData, ...posts]);
     }
 
