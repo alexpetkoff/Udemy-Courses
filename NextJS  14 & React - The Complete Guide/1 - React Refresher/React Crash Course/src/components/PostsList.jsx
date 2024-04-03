@@ -11,6 +11,11 @@ const PostsList = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [textValue, setTextValue] = useState("");
     const [nameValue, setNameValue] = useState("");
+    const [posts, setPosts] = useState([]);
+
+    function addPostHandler(postData) {
+        setPosts([postData, ...posts]);
+    }
 
     function hideModalHandler() {
         setIsVisible(!isVisible);
@@ -28,6 +33,14 @@ const PostsList = () => {
 
     function formSubmitHandler(event) {
         event.preventDefault();
+        const postData = {
+            text: textValue,
+            name: nameValue,
+        };
+        setTextValue("");
+        setNameValue("");
+        addPostHandler(postData);
+        setIsVisible(false);
     }
 
     return (
@@ -40,6 +53,7 @@ const PostsList = () => {
                         onBodyChange={changeBodyHandler}
                         onNameChange={changeNameHandler}
                         onFormSubmit={formSubmitHandler}
+                        onCancel={() => setIsVisible(false)}
                         text={textValue}
                         name={nameValue}
                     />
@@ -47,8 +61,11 @@ const PostsList = () => {
             )}
 
             <ul className={styles.posts}>
-                <Post name={nameValue} text={textValue} />
-                <Post name="Alex" text="Welcome to Udemy course...." />
+                {posts.map((post, index) => {
+                    return (
+                        <Post key={index} name={post.name} text={post.text} />
+                    );
+                })}
             </ul>
         </>
     );

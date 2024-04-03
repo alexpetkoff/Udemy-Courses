@@ -1,6 +1,13 @@
 import styles from "./NewPost.module.css";
 
-function NewPost({ onBodyChange, onNameChange, onFormSubmit, text, name }) {
+function NewPost({
+    onBodyChange,
+    onNameChange,
+    onFormSubmit,
+    text,
+    name,
+    onCancel,
+}) {
     return (
         <form onSubmit={onFormSubmit} className={styles.form}>
             <p>
@@ -22,6 +29,12 @@ function NewPost({ onBodyChange, onNameChange, onFormSubmit, text, name }) {
                     required
                     value={name}
                 />
+            </p>
+            <p className={styles.actions}>
+                <button onClick={onCancel} type="button">
+                    Cancel
+                </button>
+                <button type="submit">Submit</button>
             </p>
         </form>
     );
