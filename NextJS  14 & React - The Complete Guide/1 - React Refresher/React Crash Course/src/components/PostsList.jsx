@@ -73,7 +73,8 @@ const PostsList = () => {
                             fontWeight: "700",
                         }}
                     >
-                        No posts yet... Be the first one!
+                        <p>No posts yet...</p>
+                        <p>Be the first one!</p>
                     </div>
                 )}
             </ul>
