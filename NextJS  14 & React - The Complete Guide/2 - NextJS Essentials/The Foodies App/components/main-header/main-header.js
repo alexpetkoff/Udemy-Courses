@@ -5,6 +5,7 @@ import Image from 'next/image';
 import logoImg from '@/assets/logo.png';
 import classes from './main-header.module.css';
 import NavLink from './nav-link';
+
 const MainHeader = () => {
 
     return (
