@@ -18,7 +18,7 @@ const MealDetailsPage = ({ params }) => {
         <>
             <header className={classes.header}>
                 <div className={classes.image}>
-                    <Image src={meal.image} fill />
+                    <Image src={meal.image} alt="Image for meal description page!" fill />
                 </div>
                 <div className={classes.headerText}>
                     <h1>{meal.title}</h1>
