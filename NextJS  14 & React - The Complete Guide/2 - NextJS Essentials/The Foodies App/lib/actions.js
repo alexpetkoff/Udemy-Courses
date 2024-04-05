@@ -28,7 +28,6 @@ export async function shareMeal(prevState, formData) {
         !meal.creator_email.includes('@') ||
         !meal.image || meal.image.size === 0
     ) {
-        // throw new Error('Invalid input');
         return {
             message: 'Invalid input.'
         }
