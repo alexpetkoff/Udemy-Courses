@@ -1,8 +1,7 @@
 'use client'
 
-export default function Error({ error }) {
+export default function Error() {
 
-    console.log(error)
     return <main className="error">
         <h1>Something went wrong</h1>
         <p>Failed to fetch data... please try again later!</p>
