@@ -4,8 +4,8 @@ import React from "react";
 function NewsPage() {
     return (
         <>
-            <h1>This is news page</h1>
-            <ul>
+            <h1>News Page</h1>
+            <ul className="news-list">
                 <li>
                     <Link href="/news/link-1">Link 1</Link>
                 </li>
