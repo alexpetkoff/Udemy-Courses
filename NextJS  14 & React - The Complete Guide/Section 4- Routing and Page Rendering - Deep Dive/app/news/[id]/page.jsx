@@ -1,6 +1,6 @@
 import React from "react";
 
-const NewsIDPage = ({ params }) => {
+const NewsDetailPage = ({ params }) => {
     return (
         <div id="home">
             <h1>This is {params.id} news page</h1>
@@ -8,4 +8,4 @@ const NewsIDPage = ({ params }) => {
     );
 };
 
-export default NewsIDPage;
+export default NewsDetailPage;
