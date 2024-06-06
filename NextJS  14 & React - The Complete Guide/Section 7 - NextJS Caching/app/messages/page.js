@@ -1,10 +1,13 @@
 import Messages from '@/components/messages';
 
+// export const revalidate = 5;
+// export const dynamic = 'force-dynamic'
+
 export default async function MessagesPage() {
   const response = await fetch('http://localhost:8080/messages', {
-    headers: {
-      'X-ID': 'page',
-    },
+    // next: {
+    //   revalidate: 5
+    // }
   });
   const messages = await response.json();
 
