@@ -8,7 +8,6 @@ export const metadata = {
   description: "Latest posts from the blog NextBlog"
 }
 
-
 async function LatestPosts() {
   const latestPosts = await getPosts(2);
   return <Posts posts={latestPosts} />;
