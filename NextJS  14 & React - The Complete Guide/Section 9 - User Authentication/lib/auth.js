@@ -1,4 +1,4 @@
-import { Lucia } from 'lucia';
+import { Lucia, TimeSpan } from 'lucia';
 import { BetterSqlite3Adapter } from '@lucia-auth/adapter-sqlite'
 import { cookies } from 'next/headers';
 import db from './db';
@@ -10,7 +10,8 @@ const adapter = new BetterSqlite3Adapter(db, {
 
 const lucia = new Lucia(adapter, {
     sessionCookie: {
-        expires: false,
+        // expires: false,
+        sessionExpiresIn: new TimeSpan(2, 'w'),
         attributes: {
             secure: process.env.NODE_ENV === 'production'
         }
