@@ -2,6 +2,7 @@
 
 import { createUser } from '@/lib/user';
 import { hashUserPassword } from '@/lib/hash';
+import { redirect } from 'next/navigation';
 
 export default async function signup(prevState, formData) {
 
@@ -38,5 +39,7 @@ export default async function signup(prevState, formData) {
         }
         throw error;
     }
+
+    redirect('/training')
 
 }
