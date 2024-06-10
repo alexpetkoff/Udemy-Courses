@@ -65,7 +65,6 @@ export async function login(prevState, formData) {
         return {
             errors: {
                 password: 'Could not authenticate user, please check your credentials.'
-
             }
         }
     }
