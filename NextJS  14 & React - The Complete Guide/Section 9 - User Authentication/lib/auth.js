@@ -6,7 +6,7 @@ import db from './db';
 const adapter = new BetterSqlite3Adapter(db, {
     user: 'users',
     session: 'sessions'
-})
+});
 
 const lucia = new Lucia(adapter, {
     sessionCookie: {
