@@ -55,7 +55,6 @@ export async function login(prevState, formData) {
         return {
             errors: {
                 email: 'Could not authenticate user, please check your credentials.'
-
             }
         }
     }
