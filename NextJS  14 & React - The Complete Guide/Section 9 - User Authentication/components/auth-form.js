@@ -34,7 +34,7 @@ export default function AuthForm({ mode }) {
       }
       <p>
         <button type="submit">
-          {mode === 'signup' && 'Create Account'}
+          {mode === 'signup' && 'Create account'}
           {mode === 'login' && 'Login'}
         </button>
       </p>
