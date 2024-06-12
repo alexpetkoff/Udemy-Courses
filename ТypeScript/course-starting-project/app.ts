@@ -1,13 +1,9 @@
-const person: {
-    name: string;
-    age: number;
-    hobbies: string[];
-    role: [number, string];
-} = {
-    name: "Alex",
-    age: 30,
-    hobbies: ["Sports", "Cooking"],
-    role: [2, "author"],
-};
+function add(n1: number, n2: number) {
+    return n1 + n2;
+}
 
-console.log(person);
+function printResult(num: number): void {
+    console.log("Result: " + num);
+}
+
+printResult(add(5, 10));
