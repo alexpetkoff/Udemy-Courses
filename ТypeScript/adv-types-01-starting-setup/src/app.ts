@@ -110,13 +110,13 @@ function moveAnimal(animal: Animal) {
 moveAnimal({ type: "bird", flyingSpeed: 120 });
 moveAnimal({ type: "horse", runningSpeed: 80 });
 
-//type Casting
+// 87. Type Casting - helps TYPESCRIPT with type detection, like DOM elements
 
 // const userInputElement = <HTMLInputElement>(
 //     document.getElementById("user-input")
 // );
 
-const userInputElement = document.getElementById(
+const userInputElement = document?.getElementById(
     "user-input"
 )! as HTMLInputElement;
-userInputElement.value = "Hi there!";
+userInputElement.value = "Write here...";
