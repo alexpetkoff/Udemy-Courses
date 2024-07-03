@@ -120,3 +120,31 @@ const userInputElement = document?.getElementById(
     "user-input"
 )! as HTMLInputElement;
 userInputElement.value = "Write here...";
+
+// 88. Index Properties - feature that allows us to create Objects which are more flexible regarding the props they hold.
+
+interface ErrorContainer {
+    [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+    email: "Not a valid email!",
+    username: "Must start with a capital letter!",
+};
+
+// 89. Function Overloads!
+
+function add2(a: number, b: number): number;
+function add2(a: string, b: string): string;
+function add2(a: string, b: number): string;
+function add2(a: number, b: string): string;
+
+function add2(a: Combinable, b: Combinable) {
+    if (typeof a === "string" || typeof b === "string") {
+        //this is called typeguard.
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+
+//90. Optional Chaining!
