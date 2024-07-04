@@ -148,3 +148,21 @@ function add2(a: Combinable, b: Combinable) {
 }
 
 //90. Optional Chaining!
+
+const fetchedUserData = {
+    id: "u1",
+    name: "Aleks",
+    job: {
+        title: "CEO",
+        description: "My own company!",
+    },
+};
+
+console.log(fetchedUserData?.job?.title);
+
+// 91. Nullish Coalescing - when you have some data/ input and you dont know if it is valid or null;
+
+const userInput = "";
+const storedData = userInput ?? "Default"; // ?? - if it is null or undefined it will save in storedData = Default
+
+console.log(storedData);
