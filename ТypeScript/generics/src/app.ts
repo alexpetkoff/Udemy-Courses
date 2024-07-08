@@ -26,6 +26,8 @@ interface Lengthy {
     length: number;
 }
 
+// Generic functions
+
 function countAndPrint<T extends Lengthy>(element: T) {
     let description = "Got no value.";
     if (element.length > 0) {
@@ -35,3 +37,51 @@ function countAndPrint<T extends Lengthy>(element: T) {
 }
 
 console.log(countAndPrint("Example"));
+
+// The 'keyof' constraint
+
+function extractAndConvert<T extends object, U extends keyof T>(
+    obj: T,
+    key: U
+) {
+    return obj[key];
+}
+
+console.log(extractAndConvert({ name: "Alexander" }, "name"));
+
+//Generic classes
+
+class DataStorage<T> {
+    private data: T[] = [];
+
+    addItem(item: T) {
+        this.data.push(item);
+    }
+
+    removeItem(item: T) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+
+    getItems() {
+        return [...this.data];
+    }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem("Max");
+textStorage.addItem("Manu");
+textStorage.removeItem("Manu");
+textStorage.addItem("Alexander");
+
+console.log(textStorage.getItems());
+
+const numStorage = new DataStorage<number | string>();
+
+numStorage.addItem(1);
+numStorage.addItem(2);
+numStorage.addItem("3");
+
+console.log(numStorage.getItems());
