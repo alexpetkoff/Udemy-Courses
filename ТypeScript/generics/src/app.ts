@@ -1,11 +1,18 @@
 // const names: Array<string> = ["Alexander", "Petkov"]; // string[]
 
 // //promise example
-// const promise: Promise<string> = new Promise((resolve, reject) => {
+// const promise: Promise<string> = new Promise((resolve) => {
 //     setTimeout(() => {
 //         resolve("This is done!");
 //     }, 2000);
 // });
+
+// const data: Promise<string> = promise.then((data) => {
+//     data.split(" ");
+//     return data;
+// });
+
+// console.log(data);
 
 // Creating a Generic Function - we are telling Typescript that T , U can be from different types and will be returned as intersected object
 
