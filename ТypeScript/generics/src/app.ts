@@ -101,3 +101,27 @@ numStorage.addItem(2);
 numStorage.addItem("3");
 
 console.log(numStorage.getItems());
+
+// Generic Utility Types:
+
+interface CourseGoal {
+    title: string;
+    description: string;
+    completeUntil: Date;
+}
+
+function createCourseGoal(
+    title: string,
+    description: string,
+    date: Date
+): CourseGoal {
+    let courseGoal: Partial<CourseGoal> = {};
+
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+
+    return courseGoal as CourseGoal;
+}
+
+console.log(createCourseGoal("Title", "Description", new Date("2-02-1992")));

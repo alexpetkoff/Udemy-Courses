@@ -43,4 +43,12 @@ numStorage.addItem(1);
 numStorage.addItem(2);
 numStorage.addItem("3");
 console.log(numStorage.getItems());
+function createCourseGoal(title, description, date) {
+    let courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+console.log(createCourseGoal("Title", "Description", new Date("2-02-1992")));
 //# sourceMappingURL=app.js.map
