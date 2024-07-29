@@ -21,11 +21,19 @@ function merge<T extends object, U extends object>(objA: T, objB: U) {
 }
 
 // console.log(merge({ name: "Alex" }, { age: 30 }));
+
 const mergedObject = merge(
     { name: "Alex", hobbies: ["Football"] },
     { age: 30 }
 );
-console.log(mergedObject);
+
+const mergedObj2 = merge<{ name: string; lastName: string }, { age: number }>(
+    { name: "Iskander", lastName: "Petkov" },
+    { age: 32 }
+);
+
+// console.log(mergedObject);
+// console.log(mergedObj2);
 
 // Type Constraints - T extends object - T is a generic type that must be an object
 
@@ -35,7 +43,7 @@ interface Lengthy {
 
 // Generic functions
 
-function countAndPrint<T extends Lengthy>(element: T) {
+function countAndPrint<T extends Lengthy>(element: T): [T, string] {
     let description = "Got no value.";
     if (element.length > 0) {
         description = `Got ${element.length} elements`;
@@ -43,7 +51,8 @@ function countAndPrint<T extends Lengthy>(element: T) {
     return [element, description];
 }
 
-console.log(countAndPrint("Example"));
+// console.log(countAndPrint("Example"));
+// console.log(countAndPrint(["Example"]));
 
 // The 'keyof' constraint
 
@@ -51,7 +60,7 @@ function extractAndConvert<T extends object, U extends keyof T>(
     obj: T,
     key: U
 ) {
-    return obj[key];
+    return "Value: " + obj[key];
 }
 
 console.log(extractAndConvert({ name: "Alexander" }, "name"));

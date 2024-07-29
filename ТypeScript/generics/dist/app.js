@@ -3,7 +3,7 @@ function merge(objA, objB) {
     return Object.assign(objA, objB);
 }
 const mergedObject = merge({ name: "Alex", hobbies: ["Football"] }, { age: 30 });
-console.log(mergedObject);
+const mergedObj2 = merge({ name: "Iskander", lastName: "Petkov" }, { age: 32 });
 function countAndPrint(element) {
     let description = "Got no value.";
     if (element.length > 0) {
@@ -11,9 +11,8 @@ function countAndPrint(element) {
     }
     return [element, description];
 }
-console.log(countAndPrint("Example"));
 function extractAndConvert(obj, key) {
-    return obj[key];
+    return "Value: " + obj[key];
 }
 console.log(extractAndConvert({ name: "Alexander" }, "name"));
 class DataStorage {
