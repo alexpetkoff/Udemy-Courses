@@ -6,8 +6,36 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Understanding TypeScript</title>
         <script src="dist/app.js" defer></script>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0 auto;
+            }
+
+            form {
+                margin-top: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                width: 250px;
+            }
+
+            input {
+                height: 50px;
+                border-radius: 5px;
+                border: 2px solid rgb(158, 158, 255);
+                box-shadow: 2px 2px 2px 2px rgba(171, 210, 255, 0.462);
+                padding: 10px;
+            }
+        </style>
     </head>
     <body>
         <div id="app"></div>
+        <button>CLICK ME!</button>
+        <form>
+            <input type="text" placeholder="Course title" id="title" />
+            <input type="text" placeholder="Course price" id="price" />
+            <button type="submit">Submit</button>
+        </form>
     </body>
 </html>
