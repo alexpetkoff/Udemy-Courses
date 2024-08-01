@@ -116,16 +116,25 @@ const registeredValidators: ValidatorConfig = {};
 
 function Required(target: any, propName: string) {
     registeredValidators[target.constructor.name] = {
-        [propName]: ["required"],
+        ...registeredValidators[target.constructor.name],
+        [propName]: [
+            ...(registeredValidators[target.constructor.name]?.[propName] ??
+                []),
+            "required",
+        ],
     };
 }
 
 function PositiveNumber(target: any, propName: string) {
     registeredValidators[target.constructor.name] = {
-        [propName]: ["positive"],
+        ...registeredValidators[target.constructor.name],
+        [propName]: [
+            ...(registeredValidators[target.constructor.name]?.[propName] ??
+                []),
+            "positive",
+        ],
     };
 }
-
 function validate(obj: any) {
     const objectValidatorConfig = registeredValidators[obj.constructor.name];
     if (!objectValidatorConfig) {
@@ -146,6 +155,8 @@ function validate(obj: any) {
             }
         }
     }
+
+    console.log(objectValidatorConfig);
     return true;
 }
 
