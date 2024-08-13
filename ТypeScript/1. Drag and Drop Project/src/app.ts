@@ -93,6 +93,14 @@ function Autobind(_target: any, _methodName: string, descriptor: PropertyDescrip
     return adjustedDescriptor;
 }
 
+// Component Base Class
+
+class Component {
+    templateElement: HTMLTemplateElement;
+    hostElement: HTMLDivElement;
+    element: HTMLElement;
+}
+
 // ProjectList Class
 
 class ProjectList {
