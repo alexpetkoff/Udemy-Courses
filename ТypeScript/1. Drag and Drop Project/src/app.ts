@@ -222,6 +222,7 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> implements Drag
             listEl.classList.add("droppable");
         }
     }
+
     @Autobind
     dropHandler(event: DragEvent): void {
         const prjId = event.dataTransfer!.getData("text/plain");
