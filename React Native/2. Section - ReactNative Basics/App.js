@@ -145,7 +145,7 @@ const App = () => {
           FinishedGoalsList()
         }
       </View>
-      <View style={{ alignItems: 'center' }}>
+      <View style={{ alignItems: 'center', marginTop: 12 }}>
         <Pressable style={styles.button} onPress={() => setIsVisible(!isVisible)}>
           <Text>Add Goal</Text>
         </Pressable>
@@ -157,7 +157,8 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 70,
+    paddingTop: 70,
+    paddingBottom: 40,
     paddingHorizontal: 16,
     flex: 1,
     backgroundColor: 'skyblue',

@@ -4,7 +4,7 @@ export default function GoalItem({ item, index, actionsGoalHandler, type }) {
 
     return (
         <View style={type ? styles.finishedStyle : styles.goalsStyle}>
-            <Text >{index + 1}. {item.text}</Text>
+            <Text style={styles.goalsText} >{index + 1}. {item.text}</Text>
             {
                 type === undefined && (
                     <Pressable android_ripple={{ opacity: 0.5 }} style={({ pressed }) => pressed && { opacity: 0.5 }} onPress={() => actionsGoalHandler(index)}>
@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
+    },
+    goalsText: {
+        flex: 1,
     },
     actionsText: {
         color: 'gray',
