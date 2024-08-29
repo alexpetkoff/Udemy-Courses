@@ -1,28 +1,34 @@
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Modal } from 'react-native';
 
-export default function GoalInput({ text, setText, goalsHandler }) {
+export default function GoalInput({ text, setText, goalsHandler, isVisible, setIsVisible }) {
     return (
-        <View style={styles.inputContainer}>
-            <TextInput style={styles.textInput} placeholder="Your course goal..." value={text} onChangeText={setText} />
-            <Button title="Add Goal" onPress={goalsHandler} />
-        </View>
+        <Modal visible={isVisible} animationType={"slide"}>
+            <View style={styles.inputContainer}>
+                <TextInput autoFocus={true} style={styles.textInput} placeholder="Your course goal..."
+                    value={text} onChangeText={setText} />
+                <View style={{ flexDirection: 'row', gap: 16 }}>
+                    <Button title="Add Goal" onPress={goalsHandler} />
+                    <Button color={'red'} title="Close Modal" onPress={() => setIsVisible(false)} />
+                </View>
+            </View>
+        </Modal >
     )
 }
 
 const styles = StyleSheet.create({
     textInput: {
-        borderColor: 'lightblue',
-        borderWidth: 1,
-        padding: 4,
+        borderColor: 'lightgray',
+        borderWidth: 2,
+        padding: 12,
         width: '70%',
     },
     inputContainer: {
+        width: '100%',
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        justifyContent: 'center',
         alignItems: 'center',
+        gap: 16,
         marginBottom: 24,
-        borderBottomWidth: 1,
-        borderBottomColor: '#cccccc',
     },
 })
