@@ -1,17 +1,21 @@
-import { View, TextInput, Button, StyleSheet, Modal } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Modal, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 export default function GoalInput({ text, setText, goalsHandler, isVisible, setIsVisible }) {
     return (
         <Modal visible={isVisible} animationType={"slide"}>
-            <View style={styles.inputContainer}>
-                <TextInput autoFocus={true} style={styles.textInput} placeholder="Your course goal..."
-                    value={text} onChangeText={setText} />
-                <View style={{ flexDirection: 'row', gap: 16 }}>
-                    <Button title="Add Goal" onPress={goalsHandler} />
-                    <Button color={'red'} title="Close Modal" onPress={() => setIsVisible(false)} />
-                </View>
-            </View>
-        </Modal >
+            <KeyboardAvoidingView style={styles.inputContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.inputContainer}>
+                        <TextInput autoFocus={true} style={styles.textInput} placeholder="Your course goal..."
+                            value={text} onChangeText={setText} />
+                        <View style={{ flexDirection: 'row', gap: 16 }}>
+                            <Button title="Add Goal" onPress={goalsHandler} />
+                            <Button color={'red'} title="Close Modal" onPress={() => setIsVisible(false)} />
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback></KeyboardAvoidingView>
+        </Modal>
     )
 }
 

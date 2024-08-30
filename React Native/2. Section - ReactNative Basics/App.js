@@ -1,13 +1,12 @@
-import { useState } from 'react';
+import { useState, } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   FlatList,
-  Alert, Button,
-  Pressable
+  Alert,
+  Pressable,
 } from 'react-native';
-
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
@@ -16,7 +15,6 @@ const App = () => {
   const [finishedGoals, setFinishedGoals] = useState([]);
   const [text, setText] = useState('');
   const [isVisible, setIsVisible] = useState(false);
-
 
   const goalsHandler = () => {
     if (text.length === 0) {
@@ -119,6 +117,7 @@ const App = () => {
       <FlatList
         keyExtractor={(item) => item.id}
         data={finishedGoals}
+        refreshing={true}
         renderItem={({ item, index }) =>
           <GoalItem item={item} index={index} type='finished' actionsGoalHandler={actionsGoalHandler} />
         }
@@ -200,44 +199,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-// FLEXBOX DEEP DIVE BELOW 
-// import React from 'react';
-// import { Text, View } from 'react-native';
-
-// export default function App() {
-//   return (
-//     <View style={{ paddingTop: 60, flexDirection: 'row', gap: 10, justifyContent: 'space-evenly' }}>
-//       <View
-//         style={{
-//           backgroundColor: 'red',
-//           width: 100,
-//           height: 100,
-//           justifyContent: 'center',
-//           alignItems: 'center',
-//         }}>
-//         <Text>1</Text>
-//       </View>
-//       <View
-//         style={{
-//           backgroundColor: 'blue',
-//           width: 100,
-//           height: 100,
-//           justifyContent: 'center',
-//           alignItems: 'center',
-//         }}>
-//         <Text>2</Text>
-//       </View>
-//       <View
-//         style={{
-//           backgroundColor: 'green',
-//           width: 100,
-//           height: 100,
-//           justifyContent: 'center',
-//           alignItems: 'center',
-//         }}>
-//         <Text>3</Text>
-//       </View>
-//     </View>
-//   );
-// }
