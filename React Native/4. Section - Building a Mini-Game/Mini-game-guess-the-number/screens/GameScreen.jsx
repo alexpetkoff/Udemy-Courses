@@ -1,12 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
-
-let minBoundary = 1;
-let maxBoundary = 100;
 
 function generateRandomNumber(min, max, exclude) {
     min = Math.ceil(min);
@@ -21,17 +18,32 @@ function generateRandomNumber(min, max, exclude) {
     }
 }
 
+let minBoundary;
+let maxBoundary;
+
 function GameScreen({ userNumber, setUserNumber }) {
     const initialGuess = generateRandomNumber(1, 100, userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
 
     function nextGuessHandler(dir) {
         if (userNumber === currentGuess) {
             return;
         }
 
+        console.log("TEST -> ", minBoundary, maxBoundary, userNumber);
+
+        if (Number(userNumber) < minBoundary || Number(userNumber) > maxBoundary) {
+            Alert.alert("Invalid number!", "You are a cheating whore.", []);
+            return setUserNumber(null);
+        }
+
         if (dir === "lower") {
-            maxBoundary = currentGuess;
+            maxBoundary = currentGuess - 1;
         } else if (dir === "greater") {
             minBoundary = currentGuess + 1;
         }
@@ -60,8 +72,16 @@ function GameScreen({ userNumber, setUserNumber }) {
             <NumberContainer>{currentGuess}</NumberContainer>
             <View>
                 <Text style={styles.title}>Higher or lower?</Text>
-                <PrimaryButton title="+" pressHandler={() => nextGuessHandler("greater")} />
-                <PrimaryButton title="-" pressHandler={() => nextGuessHandler("lower")} />
+                <PrimaryButton
+                    disabled={maxBoundary === currentGuess || currentGuess === userNumber}
+                    title="+"
+                    pressHandler={() => nextGuessHandler("greater")}
+                />
+                <PrimaryButton
+                    disabled={minBoundary === currentGuess || currentGuess === userNumber}
+                    title="-"
+                    pressHandler={() => nextGuessHandler("lower")}
+                />
                 {resultHandler()}
             </View>
         </View>
