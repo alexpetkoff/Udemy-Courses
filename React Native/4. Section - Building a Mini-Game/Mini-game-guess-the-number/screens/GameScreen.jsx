@@ -35,8 +35,6 @@ function GameScreen({ userNumber, setUserNumber }) {
             return;
         }
 
-        console.log("TEST -> ", minBoundary, maxBoundary, userNumber);
-
         if (Number(userNumber) < minBoundary || Number(userNumber) > maxBoundary) {
             Alert.alert("Invalid number!", "You are a cheating whore.", []);
             return setUserNumber(null);
