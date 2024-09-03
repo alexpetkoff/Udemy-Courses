@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, StyleSheet, TextInput, Alert } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
-
+import Title from "../components/ui/Title";
 import { Colors } from "../constants/colors";
 
 function StartGameScreen({ changeScreenHandler }) {
@@ -30,6 +30,7 @@ function StartGameScreen({ changeScreenHandler }) {
 
     return (
         <View style={styles.inputContainer}>
+            <Title>GUESS THE NUMBER</Title>
             <View style={styles.numberInputContainer}>
                 <TextInput
                     style={styles.numberInput}
