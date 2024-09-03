@@ -7,6 +7,7 @@ import {
   Alert,
   Pressable,
 } from 'react-native';
+import { StatusBar } from 'expo-status-bar'; //we can mutate the status bar color with it 
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
@@ -126,31 +127,34 @@ const App = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <>
+      <StatusBar style='light' />
+      <View style={styles.container}>
 
-      {
-        isVisible &&
-        <GoalInput text={text} setText={setText} goalsHandler={goalsHandler} isVisible={isVisible} setIsVisible={setIsVisible} />
-      }
-      <View style={styles.goalsContainer}>
-        <Text>Active Goals:</Text>
         {
-          ActiveGoalsList()
+          isVisible &&
+          <GoalInput text={text} setText={setText} goalsHandler={goalsHandler} isVisible={isVisible} setIsVisible={setIsVisible} />
         }
-      </View>
-      <View style={styles.goalsFinishedContainer}>
-        <Text>Finished Goals:</Text>
-        {
-          FinishedGoalsList()
-        }
-      </View>
-      <View style={{ alignItems: 'center', marginTop: 12 }}>
-        <Pressable style={styles.button} onPress={() => setIsVisible(!isVisible)}>
-          <Text>Add Goal</Text>
-        </Pressable>
-      </View>
+        <View style={styles.goalsContainer}>
+          <Text>Active Goals:</Text>
+          {
+            ActiveGoalsList()
+          }
+        </View>
+        <View style={styles.goalsFinishedContainer}>
+          <Text>Finished Goals:</Text>
+          {
+            FinishedGoalsList()
+          }
+        </View>
+        <View style={{ alignItems: 'center', marginTop: 12 }}>
+          <Pressable style={styles.button} onPress={() => setIsVisible(!isVisible)}>
+            <Text>Add Goal</Text>
+          </Pressable>
+        </View>
 
-    </View>
+      </View>
+    </>
   )
 };
 
