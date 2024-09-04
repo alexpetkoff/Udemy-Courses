@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
         opacity: 0.75,
     },
     buttonText: {
+        fontFamily: "open-sans-bold",
         color: "white",
         textAlign: "center",
         fontSize: 16,
-        fontWeight: "700",
     },
 });
