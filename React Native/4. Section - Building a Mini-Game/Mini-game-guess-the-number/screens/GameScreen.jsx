@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, useWindowDimensions } from "react-native";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -24,6 +24,8 @@ let maxBoundary;
 function GameScreen({ userNumber, setUserNumber }) {
     const initialGuess = generateRandomNumber(1, 100, userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+    const isLandscape = useWindowDimensions().width > useWindowDimensions().height;
 
     useEffect(() => {
         minBoundary = 1;
@@ -65,9 +67,11 @@ function GameScreen({ userNumber, setUserNumber }) {
     }
 
     return (
-        <View style={styles.screen}>
-            <Title>Opponent's Guess</Title>
-            <NumberContainer>{currentGuess}</NumberContainer>
+        <View style={isLandscape ? styles.landscape : styles.screen}>
+            <View>
+                <Title>Opponent's Guess</Title>
+                <NumberContainer>{currentGuess}</NumberContainer>
+            </View>
             <View>
                 <Text style={styles.title}>Higher or lower?</Text>
                 <PrimaryButton
@@ -99,5 +103,11 @@ const styles = StyleSheet.create({
         color: "white",
         textAlign: "center",
         marginVertical: 12,
+    },
+    landscape: {
+        flexDirection: "row",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "space-around",
     },
 });
