@@ -9,7 +9,8 @@ function CategoriesScreen({ navigation }) {
         function pressHandler() {
             navigation.navigate('Overview', {
                 categoryId: itemData.item.id,
-                categoryTitle: itemData.item.title
+                categoryTitle: itemData.item.title,
+                categoryColor: itemData.item.color
             });
         }
 
