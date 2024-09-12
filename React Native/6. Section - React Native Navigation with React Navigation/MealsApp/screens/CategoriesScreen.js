@@ -1,5 +1,6 @@
-import { FlatList, StyleSheet } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
+
+import { FlatList, StyleSheet } from "react-native";
 import CategoriesGridTile from "../components/CategoriesGridTile";
 
 function CategoriesScreen({ navigation }) {
@@ -12,10 +13,23 @@ function CategoriesScreen({ navigation }) {
             });
         }
 
-        return <CategoriesGridTile title={itemData.item.title} color={itemData.item.color} onPress={pressHandler} />
+        return (
+            <CategoriesGridTile
+                title={itemData.item.title}
+                color={itemData.item.color}
+                onPress={pressHandler}
+            />
+        )
     }
 
-    return <FlatList contentContainerStyle={styles.list} data={CATEGORIES} keyExtractor={(item) => item.id} renderItem={renderCategoriesItem} numColumns={2} />
+    return (
+        <FlatList
+            contentContainerStyle={styles.list}
+            data={CATEGORIES}
+            keyExtractor={(item) => item.id}
+            renderItem={renderCategoriesItem} numColumns={2}
+        />
+    )
 }
 
 export default CategoriesScreen;

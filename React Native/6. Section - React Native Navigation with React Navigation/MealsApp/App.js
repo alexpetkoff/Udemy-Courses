@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar style='dark' />
+      <StatusBar style='auto' />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Categories" component={CategoriesScreen} />
