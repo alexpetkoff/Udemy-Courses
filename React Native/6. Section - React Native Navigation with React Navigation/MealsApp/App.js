@@ -1,6 +1,7 @@
-import { StatusBar } from 'react-native';
+import { Pressable, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text } from 'react-native';
 
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import CategoriesScreen from './screens/CategoriesScreen';

@@ -1,31 +1,57 @@
 import { useLayoutEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { MEALS } from "../data/dummy-data";
+import CustomButton from '../components/CustomButton';
 
-function MealDetailsScreen({ route }) {
-    const navigation = useNavigation();
+function MealDetailsScreen({ route, navigation }) {
 
-    const { mealID, title, categoryColor, imageUrl } = route.params;
+    const { mealID, categoryColor } = route.params;
+
+    const selectedMeal = MEALS.filter((meal) => {
+        return meal.id === mealID
+    })
 
     useLayoutEffect(() => {
         navigation.setOptions({
             title: 'Description',
             headerStyle: {
                 backgroundColor: categoryColor
+            },
+            headerRight: () => {
+                return <CustomButton color={'black'} title='Go Home' onPress={() => navigation.navigate('Categories')} />
             }
         })
-    }, [navigation])
-
+    }, [navigation, categoryColor])
 
     return (
-        <View style={styles.container}>
+        <ScrollView
+            bouncesZoom={true}
+            style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image source={{ uri: imageUrl }} style={styles.imageStyles} />
+                <Image source={{ uri: selectedMeal[0].imageUrl }} style={styles.imageStyles} />
             </View>
             <View>
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>{selectedMeal[0].title}</Text>
             </View>
-        </View>
+            <View style={{ marginBottom: 20 }}>
+                <Text style={[styles.subTitle, { textDecorationColor: categoryColor }]}>Ingredients:</Text>
+                <View style={styles.description}>
+                    {
+                        selectedMeal[0].ingredients.map((ingredient, index) => {
+                            return <Text style={styles.descriptionItem} key={ingredient}>{index + 1}. {ingredient}</Text>
+                        })
+                    }
+                </View>
+                <Text style={[styles.subTitle, { textDecorationColor: categoryColor }]}>Steps:</Text>
+                <View style={styles.description}>
+                    {
+                        selectedMeal[0].steps.map((step, index) => {
+                            return <Text style={styles.descriptionItem} key={step}>{index + 1}. {step}</Text>
+                        })
+                    }
+                </View>
+            </View>
+        </ScrollView>
     )
 }
 
@@ -47,7 +73,7 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     imageStyles: {
-        height: 200,
+        height: 300,
         borderBottomLeftRadius: 18,
         borderBottomRightRadius: 18,
     },
@@ -55,6 +81,26 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
-        margin: 16
+        margin: 16,
+        letterSpacing: 1.2
+    },
+    subTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textDecorationLine: "underline",
+        textAlign: 'center',
+        margin: 16,
+        letterSpacing: 2
+    },
+    description: {
+        textAlign: 'left',
+        gap: 6,
+    },
+    descriptionItem: {
+        fontSize: 16,
+        marginHorizontal: 20,
+        backgroundColor: '#fae3af',
+        paddingHorizontal: 10,
+        paddingVertical: 4,
     }
 })
