@@ -21,7 +21,7 @@ function MealDetailsScreen({ route, navigation }) {
                 return <CustomButton color={'black'} title='star-outline' onPress={() => navigation.navigate('Categories')} />
             }
         })
-    }, [navigation, categoryColor])
+    }, [navigation, categoryColor]);
 
     return (
         <ScrollView
