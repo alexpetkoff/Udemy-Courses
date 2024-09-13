@@ -1,7 +1,7 @@
 import { Pressable } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 
-function CustomButton({ title, onPress }) {
+function CustomButton({ color, title, onPress }) {
 
     return (
         <Pressable
@@ -12,7 +12,7 @@ function CustomButton({ title, onPress }) {
                 } : null
             }}
         >
-            <Ionicons name="home" size={24} color="black" />
+            <Ionicons name={title} size={24} color={color} />
         </Pressable>
     )
 }

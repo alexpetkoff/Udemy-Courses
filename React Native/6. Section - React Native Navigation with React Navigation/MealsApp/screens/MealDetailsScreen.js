@@ -18,7 +18,7 @@ function MealDetailsScreen({ route, navigation }) {
                 backgroundColor: categoryColor
             },
             headerRight: () => {
-                return <CustomButton color={'black'} title='Go Home' onPress={() => navigation.navigate('Categories')} />
+                return <CustomButton color={'black'} title='star-outline' onPress={() => navigation.navigate('Categories')} />
             }
         })
     }, [navigation, categoryColor])
