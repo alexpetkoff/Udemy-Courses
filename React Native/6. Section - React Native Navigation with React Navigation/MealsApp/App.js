@@ -1,10 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
+
 import MealsOverviewScreen from './screens/MealsOverviewScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import MealDetailsScreen from './screens/MealDetailsScreen';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoriteScreen from './screens/FavoritesScreen';
 import FavoriteContextProvider from './store/context/favorites-context';
 
@@ -24,7 +25,7 @@ function DrawerNavigator() {
           return <Ionicons name="albums-outline" color={color} size={size} />
         }
       }} />
-      <Drawer.Screen name="Favorites" component={FavoriteScreen} options={{ drawerIcon: ({ color, size }) => <Ionicons name="star-outline" color={color} size={size} /> }} />
+      <Drawer.Screen name="Favorites" component={FavoriteScreen} options={{ drawerIcon: ({ color, size }) => <Ionicons name="star-outline" color={color} size={size} title={'Favorites'} /> }} />
     </Drawer.Navigator>
   )
 }
@@ -37,7 +38,7 @@ export default function App() {
           <Stack.Screen
             name="MealsCategories"
             component={DrawerNavigator}
-            options={{ title: 'All Categories', headerShown: false }}
+            options={{ title: 'Back', headerShown: false }}
           />
           <Stack.Screen
             name="Overview"

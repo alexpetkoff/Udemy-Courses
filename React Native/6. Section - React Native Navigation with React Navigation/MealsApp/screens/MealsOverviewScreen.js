@@ -1,7 +1,6 @@
 import { useLayoutEffect } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
 import { MEALS } from "../data/dummy-data";
-import MealCard from '../components/MealCard';
+import MealsList from '../components/MealsList/MealsList';
 
 
 function MealsOverviewScreen({ route, navigation }) {
@@ -9,18 +8,6 @@ function MealsOverviewScreen({ route, navigation }) {
     const { categoryId, categoryTitle, categoryColor } = route.params;
 
     const filteredMeals = MEALS.filter((meal) => meal.categoryIds.includes(categoryId))
-
-    const renderMealCards = (itemData) => {
-        return <MealCard
-            id={itemData.item.id}
-            title={itemData.item.title}
-            imageUrl={itemData.item.imageUrl}
-            affordability={itemData.item.affordability}
-            complexity={itemData.item.complexity}
-            duration={itemData.item.duration}
-            categoryColor={categoryColor}
-        />
-    }
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -35,30 +22,11 @@ function MealsOverviewScreen({ route, navigation }) {
         })
     }, [navigation, categoryTitle, categoryColor])
 
-
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={filteredMeals}
-                renderItem={renderMealCards}
-                keyExtractor={(item) => item.id}
-            />
-        </View>
+        <MealsList items={filteredMeals} />
     )
+
 }
 
 export default MealsOverviewScreen;
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-
-    }
-
-    , title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    }
-})

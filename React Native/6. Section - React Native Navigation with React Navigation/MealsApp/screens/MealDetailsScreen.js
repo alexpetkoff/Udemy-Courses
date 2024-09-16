@@ -1,15 +1,26 @@
-import { useLayoutEffect } from 'react';
+import { useContext, useLayoutEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { FavoritesContext } from '../store/context/favorites-context';
 import { MEALS } from "../data/dummy-data";
 import CustomButton from '../components/CustomButton';
 
 function MealDetailsScreen({ route, navigation }) {
+    const favoriteMealsContext = useContext(FavoritesContext);
 
     const { mealID, categoryColor } = route.params;
 
     const selectedMeal = MEALS.filter((meal) => {
         return meal.id === mealID
     })
+
+    const isFavorite = favoriteMealsContext.ids.includes(mealID);
+    const buttonToRender = isFavorite ? 'star' : 'star-outline';
+
+    function starPressHandler() {
+        buttonToRender === 'star' ? favoriteMealsContext.removeFavorite(mealID) : favoriteMealsContext.addFavorite(mealID)
+
+        navigation.navigate('Favorites');
+    }
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -18,10 +29,14 @@ function MealDetailsScreen({ route, navigation }) {
                 backgroundColor: categoryColor
             },
             headerRight: () => {
-                return <CustomButton color={'black'} title='star-outline' onPress={() => navigation.navigate('Categories')} />
+                return <CustomButton
+                    color={'black'}
+                    title={buttonToRender}
+                    onPress={starPressHandler}
+                />
             }
         })
-    }, [navigation, categoryColor]);
+    }, [navigation, categoryColor, isFavorite, buttonToRender, starPressHandler]);
 
     return (
         <ScrollView
