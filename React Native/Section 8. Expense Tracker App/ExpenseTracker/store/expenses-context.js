@@ -77,7 +77,7 @@ function ExpensesContextProvider({ children }) {
     }
 
     function editExpense(id, expenseData) {
-        dispatch({ type: 'EDIT', payload: { id, ...expenseData } });
+        dispatch({ type: 'EDIT', payload: { ...expenseData, id } });
     }
 
     const value = {

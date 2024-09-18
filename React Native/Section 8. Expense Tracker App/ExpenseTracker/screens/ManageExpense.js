@@ -16,7 +16,7 @@ function ManageExpense({ route, navigation }) {
 
     const [inputValues, setInputValues] = useState({
         description: !!id ? filterExpense[0].description : '',
-        amount: !!id ? filterExpense[0].amount.toFixed(2) : 0,
+        amount: !!id ? filterExpense[0].amount : 0,
         date: !!id ? filterExpense[0].date : new Date(),
     })
 
