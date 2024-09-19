@@ -1,5 +1,5 @@
 import { useContext, useLayoutEffect, useState } from "react";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
 import IconButton from "../UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../UI/Button";
@@ -12,18 +12,18 @@ function ManageExpense({ route, navigation }) {
 
     const filterExpense = context.expenses.filter((expense) =>
         expense.id === id
-    )
+    );
 
     const [inputValues, setInputValues] = useState({
         description: !!id ? filterExpense[0].description : '',
         amount: !!id ? filterExpense[0].amount : 0,
         date: !!id ? filterExpense[0].date : new Date(),
-    })
+    });
 
     const [errors, setErrors] = useState({
         descriptionError: '',
         amountError: '',
-    })
+    });
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -64,35 +64,43 @@ function ManageExpense({ route, navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.buttons}>
-                <Button style={styles.button} mode="flat" onPress={cancelHandler}>Cancel</Button>
-                <Button style={styles.button} onPress={confirmHandler}>{!!id ? 'Update' : 'Add'}</Button>
-            </View>
-
-            <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Description</Text>
-                <TextInput
-                    defaultValue={!!id ? filterExpense[0].description : ''}
-                    onChangeText={(text) => setInputValues({ ...inputValues, description: text })}
-                    style={styles.inputField} />
-                <Text style={styles.inputLabel}>Amount</Text>
-                <TextInput
-                    defaultValue={!!id ? filterExpense[0].amount.toString() : ''}
-                    onChangeText={(text) => setInputValues({ ...inputValues, amount: Number(text.replace(',', '.')) })}
-                    keyboardType="decimal-pad"
-                    textContentType="number"
-                    style={styles.inputField} />
-            </View>
-            {
-                !!id &&
-                <View style={styles.deleteContainer}>
-                    <IconButton icon="trash" color={GlobalStyles.colors.error500} size={36} onPress={() => deleteExpenseHandler(id)} />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.container}>
+                <View style={styles.buttons}>
+                    <Button style={styles.button} mode="flat" onPress={cancelHandler}>Cancel</Button>
+                    <Button style={styles.button} onPress={confirmHandler}>{!!id ? 'Update' : 'Add'}</Button>
                 </View>
-            }
-            {errors.descriptionError && <Text style={styles.errorText}>{errors.descriptionError}</Text>}
-            {errors.amountError && <Text style={styles.errorText}>{errors.amountError}</Text>}
-        </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Description</Text>
+                    <TextInput
+                        defaultValue={!!id ? filterExpense[0].description : ''}
+                        multiline={true}
+                        numberOfLines={5}
+                        placeholder="Expense description"
+                        maxLength={255}
+                        autoCorrect={false} //default is true
+                        onChangeText={(text) => setInputValues({ ...inputValues, description: text })}
+                        style={styles.inputField} />
+                    <Text style={styles.inputLabel}>Amount</Text>
+                    <TextInput
+                        defaultValue={!!id ? filterExpense[0].amount.toString() : ''}
+                        onChangeText={(text) => setInputValues({ ...inputValues, amount: Number(text.replace(',', '.')) })}
+                        keyboardType="decimal-pad"
+                        textContentType="number"
+                        autoCorrect={false} //default is true
+                        style={styles.inputField}
+                    />
+                </View>
+                {
+                    !!id &&
+                    <View style={styles.deleteContainer}>
+                        <IconButton icon="trash" color={GlobalStyles.colors.error500} size={36} onPress={() => deleteExpenseHandler(id)} />
+                    </View>
+                }
+                {errors.descriptionError && <Text style={styles.errorText}>{errors.descriptionError}</Text>}
+                {errors.amountError && <Text style={styles.errorText}>{errors.amountError}</Text>}
+            </View >
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
         backgroundColor: GlobalStyles.colors.primary100,
         padding: 6,
         borderRadius: 6,
-        fontSize: 18,
+        fontSize: 24,
         color: GlobalStyles.colors.primary700
     },
     inputLabel: {
