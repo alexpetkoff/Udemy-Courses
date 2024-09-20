@@ -5,6 +5,7 @@ import { ExpensesContext } from "../store/expenses-context";
 
 import IconButton from "../UI/IconButton";
 import Button from "../UI/Button";
+import { deleteExpense, storeExpense, updateExpense } from "../util/http";
 
 function ManageExpense({ route, navigation }) {
 
@@ -16,9 +17,9 @@ function ManageExpense({ route, navigation }) {
     );
 
     const [inputValues, setInputValues] = useState({
-        description: !!id ? filterExpense[0].description : '',
-        amount: !!id ? filterExpense[0].amount : 0,
-        date: !!id ? filterExpense[0].date : new Date(),
+        description: !!id ? filterExpense?.[0]?.description : '',
+        amount: !!id ? filterExpense?.[0]?.amount : 0,
+        date: !!id ? filterExpense?.[0]?.date : new Date(),
     });
 
     const [errors, setErrors] = useState({
@@ -33,7 +34,8 @@ function ManageExpense({ route, navigation }) {
     }, [navigation, id]);
 
 
-    function deleteExpenseHandler() {
+    async function deleteExpenseHandler() {
+        deleteExpense(id);
         context.deleteExpense(id);
         navigation.goBack();
     }
@@ -42,7 +44,7 @@ function ManageExpense({ route, navigation }) {
         navigation.goBack();
     }
 
-    function confirmHandler() {
+    async function confirmHandler() {
 
         if (!inputValues.description || !inputValues.amount) {
             setErrors({
@@ -57,9 +59,11 @@ function ManageExpense({ route, navigation }) {
         }
 
         if (!!id) {
+            updateExpense(id, inputValues)
             context.editExpense(id, inputValues);
         } else {
-            context.addExpense(inputValues);
+            const id = await storeExpense(inputValues);
+            context.addExpense({ ...inputValues, id: id });
         }
 
         navigation.goBack();
@@ -75,7 +79,7 @@ function ManageExpense({ route, navigation }) {
                 <View style={styles.inputContainer}>
                     <Text style={styles.inputLabel}>Description</Text>
                     <TextInput
-                        defaultValue={!!id ? filterExpense[0].description : ''}
+                        defaultValue={!!id ? filterExpense?.[0]?.description : ''}
                         multiline={true}
                         numberOfLines={5}
                         placeholder="Expense description"
@@ -85,7 +89,7 @@ function ManageExpense({ route, navigation }) {
                         style={styles.inputField} />
                     <Text style={styles.inputLabel}>Amount</Text>
                     <TextInput
-                        defaultValue={!!id ? filterExpense[0].amount.toString() : ''}
+                        defaultValue={!!id ? filterExpense?.[0]?.amount?.toString() : ''}
                         onChangeText={(text) => setInputValues({ ...inputValues, amount: Number(text.replace(',', '.')) })}
                         keyboardType="decimal-pad"
                         textContentType="number"
