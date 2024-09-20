@@ -1,9 +1,10 @@
 import { useContext, useLayoutEffect, useState } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
-import IconButton from "../UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
-import Button from "../UI/Button";
 import { ExpensesContext } from "../store/expenses-context";
+
+import IconButton from "../UI/IconButton";
+import Button from "../UI/Button";
 
 function ManageExpense({ route, navigation }) {
 
@@ -30,6 +31,7 @@ function ManageExpense({ route, navigation }) {
             title: !!id ? 'Edit Expense' : 'Add Expense',
         })
     }, [navigation, id]);
+
 
     function deleteExpenseHandler() {
         context.deleteExpense(id);
@@ -121,7 +123,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-between',
-
     },
     button: {
         minWidth: 120,
