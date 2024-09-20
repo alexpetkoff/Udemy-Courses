@@ -6,8 +6,11 @@ import { ExpensesContext } from "../store/expenses-context";
 import IconButton from "../UI/IconButton";
 import Button from "../UI/Button";
 import { deleteExpense, storeExpense, updateExpense } from "../util/http";
+import LoadingOverlay from "../UI/LoadingOverlay";
 
 function ManageExpense({ route, navigation }) {
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const context = useContext(ExpensesContext);
     const id = route.params?.expenseId;
@@ -35,9 +38,13 @@ function ManageExpense({ route, navigation }) {
 
 
     async function deleteExpenseHandler() {
-        deleteExpense(id);
-        context.deleteExpense(id);
-        navigation.goBack();
+        setIsLoading(true)
+        setTimeout(() => {
+            context.deleteExpense(id);
+            deleteExpense(id);
+            navigation.goBack();
+            setIsLoading(false);
+        }, 2000)
     }
 
     function cancelHandler() {
@@ -59,14 +66,22 @@ function ManageExpense({ route, navigation }) {
         }
 
         if (!!id) {
+            setIsLoading(true)
             updateExpense(id, inputValues)
             context.editExpense(id, inputValues);
+            setIsLoading(false)
         } else {
+            setIsLoading(true)
             const id = await storeExpense(inputValues);
             context.addExpense({ ...inputValues, id: id });
+            setIsLoading(false)
         }
 
         navigation.goBack();
+    }
+
+    if (isLoading) {
+        return <LoadingOverlay />
     }
 
     return (
