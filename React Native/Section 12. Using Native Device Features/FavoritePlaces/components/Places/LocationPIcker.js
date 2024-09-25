@@ -1,18 +1,50 @@
-import { View, StyleSheet } from "react-native";
-import { } from "expo-location";
+import { View, StyleSheet, Alert, Text } from "react-native";
+import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from "expo-location";
 
 import OutlinedButton from "../ui/OutlinedButton";
 import { Colors } from "../../constants/colors";
 
 function LocationPicker() {
+    const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
 
-    function getLocationHandler() { }
+    async function verifyPermissions() {
+        if (locationPermissionInformation.status === PermissionStatus.UNDETERMINED) {
+            const permissionResponse = await requestPermission();
+
+            return permissionResponse.granted;
+        }
+
+        if (locationPermissionInformation.status === PermissionStatus.DENIED) {
+            Alert.alert(
+                'Insufficient Permissions',
+                'Please allow to use location for using this App.'
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+    async function getLocationHandler() {
+        const hasPermission = await verifyPermissions();
+
+        if (!hasPermission) {
+            return;
+        }
+
+        const location = await getCurrentPositionAsync();
+
+        console.log(location)
+    }
 
     function pickOnMapHandler() { }
 
     return (
         <View>
-            <View style={styles.mapPreview}></View>
+            <View style={styles.mapPreview}>
+                <Text>Imagine map here</Text>
+            </View>
             <View style={styles.actions}>
                 <OutlinedButton icon='location' onPress={getLocationHandler}>Locate User</OutlinedButton>
                 <OutlinedButton icon='map' onPress={pickOnMapHandler}>Pick on Map</OutlinedButton>
