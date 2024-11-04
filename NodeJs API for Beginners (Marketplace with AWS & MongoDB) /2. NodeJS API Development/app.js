@@ -7,7 +7,6 @@ const postRoutes = require('./routes/post')
 
 // middlewares
 app.use(morgan('dev'))
-
 app.use('/', postRoutes)
 
 const PORT = 3000
