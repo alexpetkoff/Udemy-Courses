@@ -9,10 +9,10 @@ const postSchema = new mongoose.Schema({
     },
     body: {
         type: String,
-        required: "Body is required",
+        required: "Body is required!",
         minlength: 4,
         maxlength: 2000
     }
 });
 
-module.exports = postSchema;
+module.exports = mongoose.model("Post", postSchema);
