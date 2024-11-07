@@ -1,8 +1,19 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+dotenv.config()
 
-// Bring in Routes
+mongoose.connect(
+    process.env.MONGO_URI
+).then(() => console.log('DB Connected!'))
+
+mongoose.connection.on('error', err => {
+    console.log(`DB connection error: ${err.message}`)
+});
+
+// bring in routes
 const postRoutes = require('./routes/post')
 
 // middlewares
