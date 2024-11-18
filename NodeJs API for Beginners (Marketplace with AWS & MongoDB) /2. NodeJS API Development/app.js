@@ -3,6 +3,8 @@ const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
 dotenv.config()
 
 mongoose.connect(
@@ -18,6 +20,8 @@ const postRoutes = require('./routes/post')
 
 // middlewares
 app.use(morgan('dev'))
+app.use(bodyParser.json())
+app.use(expressValidator())
 app.use('/', postRoutes)
 
 const PORT = 3000
