@@ -3,7 +3,7 @@ const Post = require('../models/post');
 exports.getPosts = (req, res) => {
     const posts = Post.find()
         .then((posts) => {
-            res.json({ posts: posts })
+            res.json({ posts })
         })
         .catch(err => console.log(err))
 }
