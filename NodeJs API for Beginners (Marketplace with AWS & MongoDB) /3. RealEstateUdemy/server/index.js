@@ -1,8 +1,9 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan"
 import mongoose from "mongoose";
-import "dotenv/config";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
 
@@ -18,10 +19,8 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-//routes
-app.get('/api', (req, res) => {
-    res.send(`The current time is: ${new Date().toLocaleTimeString()}`)
-});
+//routes middlewares
+app.use("/api", authRoutes)
 
 const PORT = 8000;
 
