@@ -1,13 +1,10 @@
 import express from "express";
+import { api, login } from "../controllers/auth.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.send(`The current time is: ${new Date().toLocaleDateString()}`);
-})
+router.get("/", api);
 
-router.post("/login", (req, res) => {
-    res.json({ ...req.body, message: "Login successful!" });
-})
+router.post("/login", login);
 
 export default router;
