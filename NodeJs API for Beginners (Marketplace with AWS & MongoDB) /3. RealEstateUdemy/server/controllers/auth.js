@@ -1,5 +1,5 @@
 export const api = (req, res) => {
-    res.send(`The current time is: ${new Date().toLocaleDateString()}`);
+    res.send(`The current time is: ${new Date().toLocaleTimeString()}`);
 }
 
 export const login = (req, res) => {

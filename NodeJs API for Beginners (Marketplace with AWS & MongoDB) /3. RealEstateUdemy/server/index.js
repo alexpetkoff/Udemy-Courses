@@ -13,15 +13,15 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-// Routes middlewares
-app.use("/api", authRoutes);
-
 // Function to start the server
 const startServer = async () => {
     try {
         // Connect to MongoDB
         await mongoose.connect(process.env.DATABASE);
         console.log("DB connected...");
+
+        // Routes middlewares
+        app.use("/api", authRoutes);
 
         // Start the server
         app.listen(PORT, () => {
