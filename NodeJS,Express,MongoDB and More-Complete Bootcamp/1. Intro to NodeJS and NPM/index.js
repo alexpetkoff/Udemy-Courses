@@ -18,7 +18,11 @@ console.log(textOut);
 console.log("ASYNC CODE BELOW: ", `\n`);
 
 fs.readFile('./txt/input.txt', 'utf-8', (err, data) => {
-    console.log("Finished reading...");
+    console.log("Finished reading...", data);
+
+    fs.writeFile("./txt/final.txt", data, "utf-8", error => {
+        if(error) console.log(error);
+    });
 });
 
 console.log("Reading file...");
