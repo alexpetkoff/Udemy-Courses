@@ -9,4 +9,4 @@ const textOut = `This is what we know about the avocado:\n${textIn}.`;
 
 fs.writeFileSync('./txt/output.txt', textOut);
 
-console.log(textOut);
+console.log(textOut);  
