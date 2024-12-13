@@ -1,28 +1,39 @@
 const fs = require('fs');
+const http = require('http');
 
-const hello = "Hello World!";
-console.log(hello);
+// FILES WITH NODEJS
 
-// Blocking / Synchronous
+// const hello = "Hello World!";
+// console.log(hello);
 
-const textIn = fs.readFileSync("./txt/input.txt", "utf-8"); // takes two arguments - first the path to file, second the encoding type
+// // Blocking / Synchronous
 
-const textOut = `This is what we know about the avocado:\n${textIn}.`;
+// const textIn = fs.readFileSync("./txt/input.txt", "utf-8"); // takes two arguments - first the path to file, second the encoding type
 
-fs.writeFileSync('./txt/output.txt', textOut);
+// const textOut = `This is what we know about the avocado:\n${textIn}.`;
 
-console.log(textOut);
+// fs.writeFileSync('./txt/output.txt', textOut);
 
-// Async code below:
+// console.log(textOut);
 
-console.log("ASYNC CODE BELOW: ", `\n`);
+// // Async code below:
 
-fs.readFile('./txt/input.txt', 'utf-8', (err, data) => {
-    console.log("Finished reading...", data);
+// console.log("ASYNC CODE BELOW: ", `\n`);
 
-    fs.writeFile("./txt/final.txt", data, "utf-8", error => {
-        if(error) console.log(error);
-    });
+// fs.readFile('./txt/input.txt', 'utf-8', (err, data) => {
+//     console.log("Finished reading...", data);
+
+//     fs.writeFile("./txt/final.txt", data, "utf-8", error => {
+//         if(error) console.log(error);
+//     });
+// });
+
+// console.log("Reading file...");
+
+
+
+// ---------SERVER WITH NODEJS------------ //
+
+http.createServer((req, res) => {
+    res.end("Hello from the server");
 });
-
-console.log("Reading file...");
