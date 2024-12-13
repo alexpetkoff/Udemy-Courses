@@ -34,6 +34,12 @@ const http = require('http');
 
 // ---------SERVER WITH NODEJS------------ //
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
     res.end("Hello from the server!");
+});
+
+const PORT = 8000;
+
+server.listen(PORT, "127.0.0.1", () => {
+    console.log(`Listening on port: ${PORT}`);
 });
