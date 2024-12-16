@@ -31,7 +31,6 @@ const http = require('http');
 // console.log("Reading file...");
 
 
-
 // ---------SERVER WITH NODEJS------------ //
 
 const server = http.createServer((req, res) => {
