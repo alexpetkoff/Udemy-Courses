@@ -33,6 +33,9 @@ const url = require("url");
 
 // ---------SERVER WITH NODEJS------------ //
 
+const data = fs.readFileSync("./dev-data/data.json", "utf-8");
+const dataObject = JSON.parse(data);
+
 const server = http.createServer((req, res) => {
   const pathName = req.url;
 
@@ -40,6 +43,11 @@ const server = http.createServer((req, res) => {
     res.end("This is the overview page!");
   } else if (pathName === "/product") {
     res.end("This is product page!");
+  } else if (pathName === "/api") {
+    res.writeHead(200, {
+      "content-type": "application/json",
+    });
+    res.end(data);
   } else {
     res.writeHead(404, {
       "Content-Type": "text/html",
