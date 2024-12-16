@@ -1,5 +1,6 @@
 const fs = require("fs");
 const http = require("http");
+const url = require("url");
 
 // FILES WITH NODEJS
 
@@ -33,6 +34,7 @@ const http = require("http");
 // ---------SERVER WITH NODEJS------------ //
 
 const server = http.createServer((req, res) => {
+  console.log(url);
   res.end("Hello from the server!");
 });
 
