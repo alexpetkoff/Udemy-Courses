@@ -1,5 +1,5 @@
-const fs = require('fs');
-const http = require('http');
+const fs = require("fs");
+const http = require("http");
 
 // FILES WITH NODEJS
 
@@ -12,7 +12,7 @@ const http = require('http');
 
 // const textOut = `This is what we know about the avocado:\n${textIn}.`;
 
-// fs.writeFileSync('./txt/output.txt', textOut);
+// fs.writeFileSync("./txt/output.txt", textOut);
 
 // console.log(textOut);
 
@@ -20,25 +20,24 @@ const http = require('http');
 
 // console.log("ASYNC CODE BELOW: ", `\n`);
 
-// fs.readFile('./txt/input.txt', 'utf-8', (err, data) => {
-//     console.log("Finished reading...", data);
+// fs.readFile("./txt/input.txt", "utf-8", (err, data) => {
+//   console.log("Finished reading...", data);
 
-//     fs.writeFile("./txt/final.txt", data, "utf-8", error => {
-//         if(error) console.log(error);
-//     });
+//   fs.writeFile("./txt/final.txt", data, "utf-8", (error) => {
+//     if (error) console.log(error);
+//   });
 // });
 
 // console.log("Reading file...");
 
-
 // ---------SERVER WITH NODEJS------------ //
 
 const server = http.createServer((req, res) => {
-    res.end("Hello from the server!");
+  res.end("Hello from the server!");
 });
 
 const PORT = 8000;
 
-server.listen(PORT, "127.0.0.1", () => {
-    console.log(`Listening on port: ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Listening on port: ${PORT}`);
 });
