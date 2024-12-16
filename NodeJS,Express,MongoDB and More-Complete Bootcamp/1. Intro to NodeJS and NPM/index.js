@@ -36,10 +36,16 @@ const url = require("url");
 const server = http.createServer((req, res) => {
   const pathName = req.url;
 
-  if (pathName === "/overview") {
+  if (pathName === "/overview" || pathName === "/") {
     res.end("This is the overview page!");
+  } else if (pathName === "/product") {
+    res.end("This is product page!");
   } else {
-    res.end("Hello from the server!");
+    res.writeHead(404, {
+      "Content-Type": "text/html",
+      "Test-Header": "Testing custom headers",
+    });
+    res.end("<h1>Page Not Found!</h1>");
   }
 });
 
