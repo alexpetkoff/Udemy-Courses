@@ -79,7 +79,7 @@ const server = http.createServer((req, res) => {
       return replaceTemplate(templateCard, product);
     });
 
-    res.end(templateOverview.replace("{%PRODUCT_CARDS%}", cardsHtmlArray));
+    res.end(templateOverview.replace("{%PRODUCT_CARDS%}", cardsHtmlArray.join('')));
 
     // PRODUCT page
   } else if (pathName === "/product") {
