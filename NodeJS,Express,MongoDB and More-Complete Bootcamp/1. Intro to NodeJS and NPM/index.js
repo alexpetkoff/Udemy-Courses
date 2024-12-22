@@ -30,7 +30,7 @@ const url = require("url");
 // });
 
 // console.log("Reading file...");
-
+//test
 // ---------SERVER WITH NODEJS------------ //
 
 function replaceTemplate(template, product) {
