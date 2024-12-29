@@ -1,0 +1,4 @@
+{
+  "watch": ["*.js", "templates/*.html", "dev-data/*.json"],
+  "ext": "js,json,html"
+}
