@@ -3,6 +3,8 @@ const fs = require("fs");
 const http = require("http");
 const url = require("url");
 
+const slugify = require("slugify");
+
 // Custom Modules
 const replaceTemplate = require("./modules/replaceTemplate");
 
@@ -61,6 +63,14 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, {
       "content-type": "text/html",
     });
+
+    // console.log(
+    //   slugify("Fresh Avocados from our FARM!", {
+    //     lower: true,
+    //     replacement: "-",
+    //     strict: true,
+    //   })
+    // );
 
     const cardsHtmlArray = dataObject.map((product) => {
       return replaceTemplate(templateCard, product);
