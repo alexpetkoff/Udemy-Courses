@@ -32,11 +32,20 @@ const getDocPic = async () => {
     await writeFilePro('dog-img.txt', result.body.message);
     console.log('Random dog image saved to file!');
   } catch (error) {
-    console.log(error.message);
+    throw error;
   }
+  return '2: Ready!';
 };
 
-getDocPic();
+console.log('1: Will get dog pics!');
+getDocPic()
+  .then((complete) => {
+    console.log(complete);
+    console.log('3: Done getting dog pics!');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // readFilePro(`${__dirname}/dog.txt`).then((data) => {
 //   console.log(`Breed: ${data}`);
