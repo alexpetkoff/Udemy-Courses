@@ -5,14 +5,26 @@ const app = express();
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log('Hello from the middleware ;)');
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
 const getAllTours = (req, res) => {
+  console.log(req.requestTime);
   res.status(200).json({
     status: 'success',
     results: tours.length,
+    date: req.requestTime,
     data: {
       tours,
     },
@@ -93,6 +105,7 @@ const deleteTour = (req, res) => {
   });
 };
 
+// These are commented because in express and nodejs you can chain the request types if the route is the!
 // app.get('/api/v1/tours', getAllTours);
 // app.get('/api/v1/tours/:id', getTour);
 // app.post('/api/v1/tours', createTour);
