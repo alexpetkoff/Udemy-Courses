@@ -30,22 +30,22 @@ const tourSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: [true, 'A Tour must have a price!'],
+    required: true,
   },
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
 
 const testTour = new Tour({
-  name: 'The Grand Canyon Tour',
-  rating: 4.5,
-  price: 399,
+  name: "Tour to Pleven and it' Panorama",
+  rating: 4.9,
+  price: 199,
 });
 
 testTour
   .save()
   .then((doc) => console.log(doc))
-  .catch((err) => console.log('ERROR: ', err));
+  .catch((err) => console.log('ERROR 💥 : ', err.errorResponse.errmsg));
 
 app.listen(port, () => {
   console.log(`App running on port: ${port} 🚀`);
