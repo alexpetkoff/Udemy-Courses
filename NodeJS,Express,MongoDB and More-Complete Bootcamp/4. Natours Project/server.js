@@ -17,36 +17,6 @@ mongoose.connect(DB, {}).then(() => {
 
 const port = process.env.PORT;
 
-// Schema specification for Tours!
-const tourSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'A Tour must have a name!'],
-    unique: true,
-  },
-  rating: {
-    type: Number,
-    default: 4.5,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-});
-
-const Tour = mongoose.model('Tour', tourSchema);
-
-const testTour = new Tour({
-  name: "Tour to Pleven and it' Panorama",
-  rating: 4.9,
-  price: 199,
-});
-
-testTour
-  .save()
-  .then((doc) => console.log(doc))
-  .catch((err) => console.log('ERROR 💥 : ', err.errorResponse.errmsg));
-
 app.listen(port, () => {
   console.log(`App running on port: ${port} 🚀`);
 });
