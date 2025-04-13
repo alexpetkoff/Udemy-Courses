@@ -58,8 +58,8 @@ exports.createTour = async (req, res) => {
 exports.updateTour = async (req, res) => {
   try {
     const updatedTour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
+      new: true, // if true returns the new data that was updated
+      runValidators: true, //runs validation against the schema
     });
 
     res.status(200).json({
