@@ -35,15 +35,6 @@ exports.getTour = async (req, res) => {
       message: 'Cannot find this particular tour!',
     });
   }
-
-  // const id = Number(req.params.id);
-  // const tour = tours.find((tour) => tour.id === id);
-  // res.status(200).json({
-  //   status: 'success',
-  //   data: {
-  //     tour,
-  //   },
-  // });
 };
 
 exports.createTour = async (req, res) => {
@@ -64,20 +55,25 @@ exports.createTour = async (req, res) => {
   }
 };
 
-exports.updateTour = (req, res) => {
-  if (req.params.id * 1 > tours.length) {
+exports.updateTour = async (req, res) => {
+  try {
+    const updatedTour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tour: updatedTour,
+      },
+    });
+  } catch (error) {
     res.status(404).json({
       status: 'failed',
       message: 'There is no tour with that id!',
     });
   }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      tour: '<Update tour here...>',
-    },
-  });
 };
 
 exports.deleteTour = (req, res) => {
