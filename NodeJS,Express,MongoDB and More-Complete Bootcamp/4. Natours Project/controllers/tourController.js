@@ -27,6 +27,14 @@ exports.getAllTours = async (req, res) => {
       query = query.sort('-createdAt'); //if not sort is provided, sort them by creation day desc - so it shows the new one first!
     }
 
+    // 3rd feature - Field limiting - this way we can send less data to user(usefull when we just show the products cards without details)
+    if (req.query.fields) {
+      let fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v'); // the minus before the field prop means we are excluding it
+    }
+
     //Execute a query
     const tours = await query;
 
