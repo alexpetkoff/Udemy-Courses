@@ -6,6 +6,8 @@ exports.getAllTours = async (req, res) => {
     const queryObject = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
 
+    // 1st feature - Filtering
+
     excludedFields.forEach((el) => delete queryObject[el]);
 
     let queryString = JSON.stringify(queryObject);
@@ -14,7 +16,16 @@ exports.getAllTours = async (req, res) => {
       (match) => `$${match}`
     ); // Finds gte/gt/lte/lt in the query and puts $ sign infront of it
 
-    const query = Tour.find(JSON.parse(queryString));
+    let query = Tour.find(JSON.parse(queryString));
+
+    // 2nd feature - Sorting
+
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('-createdAt'); //if not sort is provided, sort them by creation day desc - so it shows the new one first!
+    }
 
     //Execute a query
     const tours = await query;
