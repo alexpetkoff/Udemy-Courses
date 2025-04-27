@@ -35,6 +35,18 @@ exports.getAllTours = async (req, res) => {
       query = query.select('-__v'); // the minus before the field prop means we are excluding it
     }
 
+    // 4th feature - Pagination
+    const page = req.query.page * 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numberOfTours = await Tour.countDocuments();
+      if (skip >= numberOfTours) throw new Error('This page does not exist!');
+    }
+
     //Execute a query
     const tours = await query;
 
