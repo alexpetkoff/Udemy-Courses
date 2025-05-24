@@ -108,6 +108,8 @@ exports.deleteTour = async (req, res) => {
   }
 };
 
+// AGGREGATION PIPELINE
+
 exports.getTourStats = async (req, res) => {
   try {
     const stats = await Tour.aggregate([
@@ -129,7 +131,7 @@ exports.getTourStats = async (req, res) => {
       },
       {
         $sort: {
-          averagePrice: 1,
+          averagePrice: -1,
         },
       },
     ]);
