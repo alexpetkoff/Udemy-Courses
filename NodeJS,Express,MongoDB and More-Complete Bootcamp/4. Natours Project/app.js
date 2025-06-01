@@ -1,8 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const AppError = require('./utils/appError');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const errorController = require('./controllers/errorController');
 
 const app = express();
 
@@ -23,28 +25,16 @@ app.use('/api/v1/users', userRouter);
 // HANDLING UNHANDLED ROUTES
 
 app.all('*', (req, res, next) => {
-  const error = new Error(
-    `Can't find (${req.originalUrl}) endpoint on this server!`
-  );
-
-  error.status = 'fail';
-  error.statusCode = 404;
-
-  next(error); // passing error means that other middlewares will not be executet;
+  next(
+    new AppError(
+      `Can't find (${req.originalUrl}) endpoint on this server!`,
+      404
+    )
+  ); // passing into next function means that other middlewares will not be executed;
 });
 
 //ERROR HANDLING MIDDLEWARE
 
-app.use((error, req, res, next) => {
-  error.statusCode = error.statusCode || 500;
-  error.status = error.status || 'error';
-
-  res.status(error.statusCode).json({
-    status: error.status,
-    message: error.message,
-  });
-
-  next();
-});
+app.use(errorController);
 
 module.exports = app;
