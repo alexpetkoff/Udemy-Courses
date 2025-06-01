@@ -23,12 +23,28 @@ app.use('/api/v1/users', userRouter);
 // HANDLING UNHANDLED ROUTES
 
 app.all('*', (req, res, next) => {
-  res.status(404).json({
-    status: 'fail',
-    message: `Can't find (${req.originalUrl}) endpoint on this server!`,
-  });
+  const error = new Error(
+    `Can't find (${req.originalUrl}) endpoint on this server!`
+  );
+
+  error.status = 'fail';
+  error.statusCode = 404;
+
+  next(error); // passing error means that other middlewares will not be executet;
 });
 
-// SERVER STARTUP
+//ERROR HANDLING MIDDLEWARE
+
+app.use((error, req, res, next) => {
+  error.statusCode = error.statusCode || 500;
+  error.status = error.status || 'error';
+
+  res.status(error.statusCode).json({
+    status: error.status,
+    message: error.message,
+  });
+
+  next();
+});
 
 module.exports = app;
